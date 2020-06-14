@@ -41,9 +41,11 @@ if ($_POST) {
     if (isset($_POST['password'])) {
         $formData['password'] = $_POST['password'];
     }   
-
+    
+    if (isset($_POST['login']) && isset($_POST['password'])){
     header("Location: {$url}", true, 302); //si login et mdp bons, alors rediriger
     exit();
+    }
 
     //vérification du login
     if (!isset($_POST['login']) || empty($_POST['login'])) {
@@ -74,9 +76,7 @@ if ($_POST) {
 }
 
 
-// affichage du rendu d'un template
 echo $twig->render('login.html.twig', [
-    // transmission de données au template
     'errors' => $errors,
     'messages' => $messages,
     'formData' => $formData,

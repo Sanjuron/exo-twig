@@ -24,3 +24,18 @@ if (isset($_SESSION['user_id'])) {
 } else {
     echo "l'utilisateur n'est pas connecté";
 }
+
+if (!isset($_SESSION["user id"]))  {
+    $url = "contact-twig.php";
+    header("Location: {$url}", true, 302);
+    exit();
+}
+
+
+
+// affichage du rendu d'un template
+echo $twig->render('private-page.html.twig', [
+    // transmission de données au template
+    'session' => $_SESSION,
+
+]);
