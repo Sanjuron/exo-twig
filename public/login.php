@@ -22,6 +22,12 @@ $formData = [ //initialisation d'un tableau vide pour le chargement de la page
     'password'=> '',
 ];
 
+$user = require __DIR__.'/user-data.php'; // pour récupérer les données de l'utilisateur afin de les inscrire dans une base de données
+
+
+$url = 'private-page.php';
+
+
 if ($_POST) {
     dump($_POST);
 
@@ -36,12 +42,17 @@ if ($_POST) {
         $formData['password'] = $_POST['password'];
     }   
 
+    header("Location: {$url}", true, 302); //si login et mdp bons, alors rediriger
+    exit();
 
     //vérification du login
     if (!isset($_POST['login']) || empty($_POST['login'])) {
         $errors['login'] = true;
         $messages['login'] = "identifiant ou mot de passe incorrect";
     } elseif (strlen($_POST) < 4 || strlen($_POST) > 100){
+        $errors['login'] = true;
+        $messages['login'] = "identifiant ou mot de passe incorrect";
+    } elseif ($_POST['login'] != $user['user_id']){
         $errors['login'] = true;
         $messages['login'] = "identifiant ou mot de passe incorrect";
     } // à refactoriser en un seul if
@@ -54,7 +65,19 @@ if ($_POST) {
     } elseif (strlen($_POST) < 4 || strlen($_POST) > 100){
         $errors['password'] = true;
         $messages['password'] = "identifiant ou mot de passe incorrect";
+    }elseif (!password_verify($_POST['password'], $user['passwrd_hash'])) {
+        echo 'identifiant ou mot de passe incorrect;
     }
+    
 
 
 }
+
+
+// affichage du rendu d'un template
+echo $twig->render('login.html.twig', [
+    // transmission de données au template
+    'errors' => $errors,
+    'messages' => $messages,
+    'formData' => $formData,
+]);

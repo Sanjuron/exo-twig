@@ -1,3 +1,36 @@
-*{
+h1{
+    text-align: center;
+    font-weight: bold;
+}
+
+form {
+    background-color: whitesmoke;
+    width : 40%;
+    margin: 0 auto;
+    padding : 3%;
+}
+
+label {
+    display: block;
+    padding : 5px;
+    text-decoration: underline;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+input{
+    border-radius: 2px;
+    padding : 5px;
+    border : 1px solid grey;
+}
+
+button {
+    display: block;
+    padding : 12px 14px;
     background-color: blueviolet;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 2px;
+    margin : 0 auto;
 }

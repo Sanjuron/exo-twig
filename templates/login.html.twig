@@ -10,20 +10,21 @@
     <h1>Login</h1>
 
     <form action="" method="post">
-        <label for="login">Login</label>
+        <label for="login">Login :</label>
         <input type="text" name="login" id="login" class="form-control {% if errors.login is defined %}is-invalid{% endif %}" placeholder="entrez votre login" value="{{formData.login}}">
             {% if errors.login is defined %}
                 <div class="invalid-feedback">
                     {{ messages.login }} 
                 </div>
             {% endif %}
-        <label for="password">Mot de passe</label>
+        <label for="password">Mot de passe :</label>
         <input type="password" name="password"class="form-control {% if errors.password is defined %}is-invalid{% endif %}" id="password" placeholder="entrez votre mot de passe" value="{{formData.password}}">
             {% if errors.password is defined %}
                 <div class="invalid-feedback">
                     {{ messages.password }}
                 </div>
             {% endif %}
+        <button>Submit</button>
     </form>
     
 </body>
